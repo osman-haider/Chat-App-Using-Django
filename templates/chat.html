@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat Box</title>
+</head>
+<body>
+    <h3>Chat Box</h3>
+    <form method="post">
+        {% csrf_token %}
+        <label for="username">Username</label>
+        <input type="text" placeholder="Enter Username" id="username" name="username">
+        <br>
+        <label for="message">Message</label>
+        <input type="text" placeholder="Enter your message here" id="message" name="message">
+        <br>
+        <button type="submit">Send Message</button>
+    </form>
+    <div>
+        <h4>Messages:</h4>
+        <ul>
+            {% for message in messages %}
+            <li><strong>{{ message.username }}:</strong> {{ message.message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <form action="{% url 'clear_chat' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Clear Chat</button>
+    </form>
+</body>
+</html>
